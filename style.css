@@ -1,0 +1,102 @@
+* {
+   margin: 0;
+   padding: 0;
+}
+
+input[type='number'] {
+   -moz-appearance: textfield;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+   -webkit-appearance: none;
+}
+
+body {
+   display: flex;
+   padding-top: 40px;
+   background: rgb(120, 231, 148);
+}
+
+.wrapper {
+   margin: 0 auto;
+   width: 90%;
+}
+
+.wrapper * {
+   width: 100%;
+}
+
+.inputElements {
+   display: flex;
+   margin-bottom: 40px;
+}
+
+.inputElements input {
+   flex: 0 1 70%;
+   padding: 10px;
+   font-size: 16px;
+   font-weight: 500;
+   border: none;
+   background: rgb(67, 202, 85);
+   color: rgba(255, 255, 255, 0.863);
+   letter-spacing: 3px;
+}
+
+input:focus {
+   outline: none;
+   box-shadow: 0 0 100px inset rgba(0, 0, 0, 0.212);
+}
+
+button:focus {
+   outline: none;
+   box-shadow: 0 0 100px inset rgba(0, 0, 0, 0.212);
+}
+
+button:hover {
+   cursor: pointer;
+   box-shadow: 0 0 100px inset rgba(0, 0, 0, 0.212);
+}
+
+.inputElements input:nth-of-type(2) {
+   border-left: none;
+}
+
+.inputElements input:nth-of-type(1) {
+   border-right: 1px solid #fff;
+}
+
+.inputElements button {
+   flex: 0 1 30%;
+   margin-left: 10px;
+   border: none;
+}
+
+table * {
+   border: 1px solid #000;
+}
+
+table tr {
+   display: flex;
+   border: none;
+}
+
+table tr:focus {
+   outline: 1px solid #000;
+}
+
+table td:first-of-type {
+   flex: 1 0 60%;
+}
+
+table td {
+   border: none;
+   margin-bottom: 7px;
+}
+table td:nth-of-type(2) {
+   margin: 0 5px 0 5px;
+}
+
+.td-buttons {
+   display: flex;
+}
