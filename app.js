@@ -1,16 +1,15 @@
-const table = document.querySelector('table')
-const values = []
+const list = document.querySelector('.list')
+const items = []
 const nameInput = document.querySelector('.name-input')
 const costInput = document.querySelector('.cost-input')
-const button = document.querySelector('button')
-const form = document.querySelector('form')
+const listForm = document.querySelector('.list-form')
 
 function deleteBtnListener(btn) {
    btn.addEventListener('click', (e) => {
       e.preventDefault()
 
-      const line = btn.parentNode.parentNode
-      line.remove()
+      const item = btn.parentNode
+      item.remove()
    })
 }
 
@@ -18,110 +17,122 @@ function editeBtnLisener(btn) {
    btn.addEventListener('click', (e) => {
       e.preventDefault()
 
-      const line = btn.parentNode.parentNode
-      const formIsEditing = !!+btn.dataset.editing
-      if (formIsEditing) {
-         compliteEditingLine(line)
+      const item = btn.parentNode
+
+      const formIsEditing = btn.dataset.editing
+      if (formIsEditing === 'false') {
+         editeItem(item, btn)
       } else {
-         editeLine(line)
+         compliteEditingItem(item)
       }
    })
 }
 
-function editeInputListener(elem) {
-   elem.addEventListener('keyup', (e) => {
-      const line = elem.parentNode.parentNode
-      if (e.code == 'Enter') {
-         compliteEditingLine(line)
-      }
-   })
-}
+function compliteEditingItem(item) {
+   console.log('test')
 
-function editeLine(tr) {
-   const btn = tr.querySelector('.btn-edite')
-   const tdButtons = btn.parentNode
-   const tdCost = tdButtons.previousSibling
-   const tdName = tdCost.previousSibling
-   btn.textContent = 'OK'
+   const btn = item.querySelector('.btn-edite')
+   const itemInputCost = item.querySelector('.input-cost')
+   const itemInputName = item.querySelector('.input-name')
+   const itemCost = document.createElement('span')
+   const itemForm = item.querySelector('form')
 
-   const valueCost = tdCost.textContent
-   const valueName = tdName.textContent
-   tdName.textContent = ''
-   tdCost.textContent = ''
-
-   const inputCost = document.createElement('input')
-   inputCost.setAttribute('type', 'number')
-   const inputName = document.createElement('input')
-   inputName.value = valueName
-   inputCost.value = valueCost
-
-   tdCost.appendChild(inputCost)
-   tdName.appendChild(inputName)
-
-   editeInputListener(inputCost)
-   editeInputListener(inputName)
-
-   btn.dataset.editing = '1'
-}
-
-function compliteEditingLine(tr) {
-   const btn = tr.querySelector('.btn-edite')
-   const tdName = tr.querySelector('.td-name')
-   const tdCost = tr.querySelector('.td-cost')
-   const inputCost = tdCost.querySelector('input')
-   const inputName = tdName.querySelector('input')
+   itemCost.classList.add('item-cost')
+   const itemName = document.createElement('span')
+   itemName.classList.add('item-name')
 
    btn.textContent = 'EDITE'
 
-   const valueCost = inputCost.value
-   const valueName = inputName.value
+   const valueCost = itemInputCost.value
+   const valueName = itemInputName.value
 
-   tdCost.textContent = valueCost
-   tdName.textContent = valueName
+   itemCost.textContent = valueCost
+   itemName.textContent = valueName
 
-   btn.dataset.editing = '0'
+   itemForm.remove()
+   item.prepend(itemCost)
+   item.prepend(itemName)
+
+   btn.type = 'button'
+   btn.dataset.editing = 'false'
 }
 
-function addPurshase() {
-   const tdName = document.createElement('td')
-   tdName.classList.add('td-name')
-   const tdCost = document.createElement('td')
-   tdCost.classList.add('td-cost')
-   const tdButtons = document.createElement('td')
-   tdButtons.classList.add('td-buttons')
-   const btnEdite = document.createElement('button')
-   btnEdite.classList.add('btn-edite')
-   btnEdite.dataset.editing = '0'
-   const btnDelete = document.createElement('button')
-   btnDelete.classList.add('btn-delete')
-   const tr = document.createElement('tr')
-   const params = values[0]
+function editeItem(item, btn) {
+   const itemCost = item.querySelector('.item-cost')
+   const itemName = item.querySelector('.item-name')
+   const valueCost = itemCost.textContent
+   const valueName = itemName.textContent
+   itemCost.remove()
+   itemName.remove()
 
-   tdName.textContent = params[0]
-   tdCost.textContent = params[1]
-   btnEdite.textContent = 'EDITE'
-   btnDelete.textContent = 'DEL'
+   const itemEditingForm = document.createElement('form')
+   itemEditingForm.classList.add('item-form', 'form')
+   const itemInputCost = document.createElement('input')
+   itemInputCost.setAttribute('type', 'number')
+   itemInputCost.classList.add('input-cost')
+   const itemInputName = document.createElement('input')
+   itemInputName.setAttribute('type', 'text')
+   itemInputName.classList.add('input-name')
+   itemInputCost.value = valueCost
+   itemInputName.value = valueName
 
-   editeBtnLisener(btnEdite)
-   deleteBtnListener(btnDelete)
+   itemEditingForm.appendChild(itemInputName)
+   itemEditingForm.appendChild(itemInputCost)
 
-   tdButtons.appendChild(btnEdite)
-   tdButtons.appendChild(btnDelete)
+   item.prepend(itemEditingForm)
 
-   tr.appendChild(tdName)
-   tr.appendChild(tdCost)
-   tr.appendChild(tdButtons)
+   itemEditingForm.addEventListener('submit', (e) => {
+      e.preventDefault()
 
-   table.prepend(tr)
+      compliteEditingItem(item)
+   })
+
+   const formID = Math.random()
+   itemEditingForm.id = formID
+   btn.setAttribute('form', formID)
+
+   btn.textContent = 'OK'
+   btn.type = 'submit'
+   btn.dataset.editing = 'true'
 }
 
-form.addEventListener('submit', (e) => {
+function addItem() {
+   const item = document.createElement('li')
+   item.classList.add('list-item', 'item')
+   const itemCost = document.createElement('span')
+   itemCost.classList.add('item-cost')
+   const itemName = document.createElement('span')
+   itemName.classList.add('item-name')
+   const btnEditeItem = document.createElement('button')
+   btnEditeItem.classList.add('btn-edite')
+   btnEditeItem.dataset.editing = 'false'
+   const btnDeleteItem = document.createElement('button')
+   btnDeleteItem.classList.add('btn-delete')
+   const params = items[0]
+
+   itemCost.textContent = params[1]
+   itemName.textContent = params[0]
+   btnEditeItem.textContent = 'EDITE'
+   btnDeleteItem.textContent = 'DEL'
+
+   editeBtnLisener(btnEditeItem)
+   deleteBtnListener(btnDeleteItem)
+
+   item.appendChild(itemName)
+   item.appendChild(itemCost)
+   item.appendChild(btnEditeItem)
+   item.appendChild(btnDeleteItem)
+
+   list.prepend(item)
+}
+
+listForm.addEventListener('submit', (e) => {
    e.preventDefault()
 
    if (nameInput.value && costInput.value) {
-      const buy = [nameInput.value, costInput.value]
-      values.unshift(buy)
-      addPurshase()
+      const itemProps = [nameInput.value, costInput.value]
+      items.unshift(itemProps)
+      addItem()
       nameInput.value = ''
       costInput.value = ''
    }
