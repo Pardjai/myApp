@@ -3,8 +3,22 @@
    padding: 0;
 }
 
+button {
+   cursor: pointer;
+   padding: 0;
+}
+
+input,
+button {
+   border-width: 0;
+}
+
 ul {
    list-style: none;
+}
+
+input:focus {
+   outline: none;
 }
 
 input[type='number'] {
@@ -19,7 +33,7 @@ input::-webkit-inner-spin-button {
 body {
    display: flex;
    padding-top: 40px;
-   background: rgb(120, 231, 148);
+   background: rgb(33, 36, 34);
 }
 
 .wrapper {
@@ -31,51 +45,75 @@ body {
    width: 100%;
 }
 
-.inputElements {
+.list-form {
    display: flex;
-   margin-bottom: 40px;
+   height: 2rem;
+   margin-bottom: 20px;
 }
 
-.inputElements input {
-   flex: 0 1 70%;
-   padding: 10px;
+.list-form-button-reset,
+.list-form-button-submit {
+   width: 30px;
+   min-width: 30px;
+   height: 100%;
+}
+
+.list-item {
+   display: flex;
+}
+
+.list-form input {
+   padding: 5px;
    font-size: 16px;
    font-weight: 500;
-   border: none;
-   background: rgb(67, 202, 85);
-   color: rgba(255, 255, 255, 0.863);
+   background: #000;
+   color: oldlace;
    letter-spacing: 3px;
 }
 
-input:focus {
-   outline: none;
-   box-shadow: 0 0 100px inset rgba(0, 0, 0, 0.212);
+.list-form input:not(:last-of-type) {
+   border-right: 1px solid rgb(58, 59, 59);
 }
 
-button:focus {
-   outline: none;
-   box-shadow: 0 0 100px inset rgba(0, 0, 0, 0.212);
+.list-item button {
+   flex: 0 0 30px;
 }
 
-button:hover {
-   cursor: pointer;
-   box-shadow: 0 0 100px inset rgba(0, 0, 0, 0.212);
+.list-item span {
+   padding: 5px;
+   background: rgb(223, 223, 223);
 }
 
-.inputElements input:nth-of-type(2) {
-   border-left: none;
-}
-
-.inputElements input:nth-of-type(1) {
-   border-right: 1px solid #fff;
-}
-
-.inputElements button {
-   flex: 0 1 30%;
-   margin-left: 10px;
+.item * {
    border: none;
+   outline: none;
+   border-radius: 0;
 }
 
-li * {
-   border: 1px solid #000;
+.list-form button:not(:last-of-type) {
+   margin-right: 5px;
+}
+
+.item button:not(:last-of-type) {
+   margin-right: 5px;
+}
+
+.item {
+   color: oldlace;
+}
+
+.item span {
+   background: #000;
+}
+
+.item-form {
+   display: flex;
+   height: 30px;
+}
+
+.item-form input {
+   background: #000;
+   color: oldlace;
+   font-size: 16px;
+   padding: 5px;
 }

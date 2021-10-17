@@ -6,16 +6,35 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <title>myApp</title>
       <link rel="stylesheet" href="style.css" />
+      <link
+         rel="stylesheet"
+         href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      />
    </head>
    <body>
       <div class="wrapper">
          <form class="list-form form">
             <input class="name-input" type="text" />
             <input class="cost-input" type="number" />
-            <button type="reset">RESET</button>
-            <button type="submit">ADD</button>
+            <button
+               type="reset"
+               class="
+                  list-form-button-reset
+                  material-icons-outlined material-icons
+               "
+            >
+               restart_alt
+            </button>
+            <button
+               type="submit"
+               class="
+                  list-form-button-submit
+                  material-icons-outlined material-icons
+               "
+            >
+               add
+            </button>
          </form>
-
          <ul class="list"></ul>
       </div>
 

@@ -31,7 +31,7 @@ function editeBtnLisener(btn) {
 function compliteEditingItem(item) {
    console.log('test')
 
-   const btn = item.querySelector('.btn-edite')
+   const btn = item.querySelector('.btn-edit')
    const itemInputCost = item.querySelector('.input-cost')
    const itemInputName = item.querySelector('.input-name')
    const itemCost = document.createElement('span')
@@ -41,7 +41,7 @@ function compliteEditingItem(item) {
    const itemName = document.createElement('span')
    itemName.classList.add('item-name')
 
-   btn.textContent = 'EDITE'
+   btn.textContent = 'edit'
 
    const valueCost = itemInputCost.value
    const valueName = itemInputName.value
@@ -91,7 +91,8 @@ function editeItem(item, btn) {
    itemEditingForm.id = formID
    btn.setAttribute('form', formID)
 
-   btn.textContent = 'OK'
+   btn.classList.add('material-icons-outlined', 'material-icons')
+   btn.textContent = 'done'
    btn.type = 'submit'
    btn.dataset.editing = 'true'
 }
@@ -104,16 +105,24 @@ function addItem() {
    const itemName = document.createElement('span')
    itemName.classList.add('item-name')
    const btnEditeItem = document.createElement('button')
-   btnEditeItem.classList.add('btn-edite')
+   btnEditeItem.classList.add(
+      'btn-edit',
+      'material-icons-outlined',
+      'material-icons'
+   )
+   btnEditeItem.textContent = 'edit'
    btnEditeItem.dataset.editing = 'false'
    const btnDeleteItem = document.createElement('button')
-   btnDeleteItem.classList.add('btn-delete')
+   btnDeleteItem.classList.add(
+      'btn-delete',
+      'material-icons-outlined',
+      'material-icons'
+   )
+   btnDeleteItem.textContent = 'delete'
    const params = items[0]
 
    itemCost.textContent = params[1]
    itemName.textContent = params[0]
-   btnEditeItem.textContent = 'EDITE'
-   btnDeleteItem.textContent = 'DEL'
 
    editeBtnLisener(btnEditeItem)
    deleteBtnListener(btnDeleteItem)
